@@ -3,7 +3,7 @@ const request = require('supertest');
 const db = require('../database/helper');
 
 server.listen(3035, () => {
-  console.log(`\n=== Testing on listening on port 3030\n`);
+  console.log(`\n=== Test running on port 3035\n`);
 });
 const token =
   'ˀeyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEsInVzZXJuYW1lIjoibWlrZSIsImlhdCI6MTU2NDEzNDI3MiwiZXhwIjoxNTY0MjIwNjcyfQ.kIPEQ_N8jpXiGCljB2WJ_hy64gAbWBG9Ew4GheBeKUU';
