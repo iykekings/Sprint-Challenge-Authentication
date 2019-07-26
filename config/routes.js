@@ -26,8 +26,11 @@ async function register(req, res) {
   }
 }
 
-function login(req, res) {
-  // implement user login
+async function login(req, res) {
+  // try {
+  //   const
+  // } catch (error) {
+  // }
 }
 
 function getJokes(req, res) {
