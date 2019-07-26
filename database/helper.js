@@ -12,7 +12,13 @@ const add = user =>
     .insert(user)
     .then(([id]) => (!id ? null : get({ id })));
 
+const remove = filter =>
+  db('users')
+    .where(filter)
+    .delete();
+
 module.exports = {
   get,
-  add
+  add,
+  remove
 };
