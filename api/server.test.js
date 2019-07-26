@@ -37,7 +37,19 @@ describe('[POST] /api/register', () => {
       .expect(201)
       .then(res => expect(res.body.username).toEqual('john'));
   });
+  it('Returns bad request 400 when username and/or password is missing', async () => {
+    request(server)
+      .post('/api/register')
+      .send({ username: 'john' })
+      .set('Accept', 'application/json')
+      .expect('Content-Type', /json/)
+      .expect(400)
+      .then(res =>
+        expect(res.body.message).toEqual('Please provide username and password')
+      );
+  });
 });
+
 describe('[POST] /api/login', () => {
   it('Creates a user and returns the user', () => {
     request(server)

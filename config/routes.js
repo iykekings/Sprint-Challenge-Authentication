@@ -12,15 +12,20 @@ module.exports = server => {
 };
 
 async function register(req, res) {
+  const { username, password } = req.body;
   try {
-    const salt = bcrypt.genSaltSync(10);
-    const user = req.body;
-    user.password = bcrypt.hashSync(req.body.password, salt);
-    const newUser = await Users.add(user);
-    if (newUser) {
-      res.status(201).json(newUser);
+    if (username && password) {
+      const salt = bcrypt.genSaltSync(10);
+      const user = req.body;
+      user.password = bcrypt.hashSync(req.body.password, salt);
+      const newUser = await Users.add(user);
+      if (newUser) {
+        res.status(201).json(newUser);
+      } else {
+        res.status(404).json({ message: 'Error retrieving the user' });
+      }
     } else {
-      res.status(404).json({ message: 'Error retrieving the user' });
+      res.status(400).json({ message: 'Please provide username and password' });
     }
   } catch (error) {
     res.status(500).json({ message: 'Could not create the user' });
