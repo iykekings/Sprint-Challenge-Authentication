@@ -32,7 +32,10 @@ async function login(req, res) {
     const { username, password } = req.body;
     const user = await Users.get({ username });
     const isUser = bcrypt.compareSync(password, user.password);
-    res.send(isUser);
+    if (isUser) {
+      const token = genToken(user);
+      res.status(200).json({ message: `Welcome ${username}`, token });
+    }
   } catch (error) {
     res.status(500).json('Could not loggin');
   }
