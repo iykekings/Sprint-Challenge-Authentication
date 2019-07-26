@@ -38,3 +38,22 @@ describe('[POST] /api/register', () => {
       .then(res => expect(res.body.username).toEqual('john'));
   });
 });
+describe('[POST] /api/login', () => {
+  it('Creates a user and returns the user', () => {
+    request(server)
+      .post('/api/login')
+      .send({ username: 'mike', password: '1234' })
+      .set('Accept', 'application/json')
+      .expect('Content-Type', /json/)
+      .expect(200)
+      .then(res => expect(res.body.token).toBeInstanceOf(String));
+  });
+  it('Returns unathorized with wrong credentials', () => {
+    request(server)
+      .post('/api/login')
+      .send({ username: 'mike', password: '1234ff' })
+      .set('Accept', 'application/json')
+      .expect('Content-Type', /json/)
+      .expect(401);
+  });
+});
